@@ -361,7 +361,8 @@ import_activpal3_csv <- function(filepath, header = FALSE) {
 #'   options(default_ops)
 import_actigraph_csv_chunked <- function(filepath,
                                          in_voltage = FALSE,
-                                         header = TRUE, chunk_samples=180000,
+                                         header = TRUE, 
+                                         chunk_samples=180000,
                                          has_ts = TRUE) {
   chunk_size <- chunk_samples
   actigraph_meta <- import_actigraph_meta(filepath)
