@@ -580,7 +580,8 @@ mims_unit_from_files <-
            dynamic_range,
            output_mims_per_axis = FALSE,
            use_gui_progress = FALSE,
-           file_type = "mhealth", ...) {
+           file_type = "mhealth", 
+           has_ts = TRUE, ...) {
     num_of_files <- length(files)
     dots = list(...)
     df <- NULL
@@ -590,7 +591,7 @@ mims_unit_from_files <-
       import_fun <- import_mhealth_csv_chunked
       header = TRUE
     } else if (file_type == "actigraph") {
-      import_fun <- function(x, chunk_samples) import_actigraph_csv_chunked(x, chunk_samples = chunk_samples, ...)
+      import_fun <- function(x, chunk_samples) import_actigraph_csv_chunked(x, chunk_samples = chunk_samples, has_ts = has_ts, ...)
       header = dots$header
     } else {
       stop('Only "mhealth" or "actigraph" file types are supported')
