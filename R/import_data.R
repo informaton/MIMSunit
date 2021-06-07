@@ -363,7 +363,7 @@ import_actigraph_csv_chunked <- function(filepath,
                                          in_voltage = FALSE,
                                          header = TRUE, 
                                          chunk_samples=180000,
-                                         has_ts = TRUE) {
+                                         has_ts=TRUE) {
   chunk_size <- chunk_samples
   actigraph_meta <- import_actigraph_meta(filepath)
 
