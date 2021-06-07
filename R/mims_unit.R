@@ -591,6 +591,7 @@ mims_unit_from_files <-
       import_fun <- import_mhealth_csv_chunked
       header = TRUE
     } else if (file_type == "actigraph") {
+    	cat("File type is actigraph")
       import_fun <- function(x, chunk_samples, has_ts) import_actigraph_csv_chunked(x, chunk_samples = chunk_samples, has_ts = has_ts, ...)
       header = dots$header
     } else {
@@ -613,7 +614,7 @@ mims_unit_from_files <-
         file_pb$set(value=i/num_of_files, message=paste("Compute MIMS-unit values for", files[i]))
       }
       if (file_type == "actigraph") {    
-	  	funcs = import_fun(files[i], chunk_samples = num_per_load, has_ts)
+	  	funcs = import_fun(files[i], chunk_samples = num_per_load, has_ts = has_ts)
 	  }
 	  else{		  
     	funcs = import_fun(files[i], chunk_samples = num_per_load)
