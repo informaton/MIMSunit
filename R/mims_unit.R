@@ -591,7 +591,7 @@ mims_unit_from_files <-
       import_fun <- import_mhealth_csv_chunked
       header = TRUE
     } else if (file_type == "actigraph") {
-      import_fun <- function(x, chunk_samples) import_actigraph_csv_chunked(x, chunk_samples = chunk_samples, has_ts = has_ts, ...)
+      import_fun <- function(x, chunk_samples, has_ts) import_actigraph_csv_chunked(x, chunk_samples = chunk_samples, has_ts = has_ts, ...)
       header = dots$header
     } else {
       stop('Only "mhealth" or "actigraph" file types are supported')
@@ -612,7 +612,12 @@ mims_unit_from_files <-
       if (shiny::isRunning()) {
         file_pb$set(value=i/num_of_files, message=paste("Compute MIMS-unit values for", files[i]))
       }
-      funcs = import_fun(files[i], chunk_samples = num_per_load)
+      if (file_type == "actigraph") {    
+	  	funcs = import_fun(files[i], chunk_samples = num_per_load, has_ts)
+	  }
+	  else{		  
+    	funcs = import_fun(files[i], chunk_samples = num_per_load)
+	  }
       next_chunk = funcs[[1]]
       close_con = funcs[[2]]
 
