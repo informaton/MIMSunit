@@ -361,11 +361,10 @@ import_activpal3_csv <- function(filepath, header = FALSE) {
 #'   options(default_ops)
 import_actigraph_csv_chunked <- function(filepath,
                                          in_voltage = FALSE,
-                                         header = TRUE, chunk_samples=180000) {
+                                         header = TRUE, chunk_samples=180000,
+                                         has_ts = TRUE) {
   chunk_size <- chunk_samples
   actigraph_meta <- import_actigraph_meta(filepath)
-
-  has_ts = TRUE
 
   if (has_ts) {
     ncols <- 4
@@ -531,9 +530,9 @@ import_actigraph_csv_chunked <- function(filepath,
 import_actigraph_csv <-
   function(filepath,
            in_voltage = FALSE,
-           header = TRUE) {
+           header = TRUE,
+           has_ts = TRUE) {
     actigraph_meta <- import_actigraph_meta(filepath)
-    has_ts = TRUE
     if (has_ts) {
       ncols <- 4
       col_types <- paste(c("c", rep("d", ncols - 1)), collapse = "")
@@ -562,7 +561,6 @@ import_actigraph_csv <-
         )
     }
 
-    has_ts = TRUE
     if (has_ts && ncol(dat) == 3) {
       stop("The input data only has 3 columns, there should be 4 columns with the first column being the timestamps.")
     }
